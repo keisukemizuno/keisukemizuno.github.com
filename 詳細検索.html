@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>詳細検索</title>
+<link rel="stylesheet" type="text/css" media="all" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="style.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="style_pc.css"/>
+<link rel="stylesheet" type="text/css" media="screen and (max-width: 640px)" href="style_sp.css" />
+</head>
+<body>
+<div id="EVENT_SEARCH_WINDOW">
+<div class="title">イベント検索</div>
+<div class="item_area clerafix">
+
+<div class="item_box">
+<div class="item_box_label">都道府県で探す</div>
+<select name="">
+<option value="都道府県を選択">都道府県を選択</option>
+<option value="サンプル2">サンプル2</option>
+</select>
+</div>
+
+<div class="item_box">
+<div class="item_box_label">エリアで探す</div>
+<select name="">
+<option value="市区町村を選択">市区町村を選択</option>
+<option value="サンプル2">サンプル2</option>
+</select>
+</div>
+
+<div class="item_box">
+<div class="item_box_label">日時で探す</div>
+<input type="search" placeholder="日時を選択">
+</div>
+
+<div class="item_box">
+<div class="item_box_label">ジャンルで探す</div>
+<ul>
+<li class="on">20代</li><li class="on">30代</li><li>エグゼクティブ</li><li class="on">女性無料</li><li>街コン</li>
+</ul>
+</div>
+
+<div class="item_box">
+<div class="item_box_label">フリーワードで探す</div>
+<input type="search" placeholder="キーワードを入力">
+</div>
+</div><!-- /.item_area -->
+<div class="item_area_serch_btn">
+<div class="serch_btn">絞り込む</div>
+</div>
+</div><!-- /#EVENT_SEARCH_WINDOW -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script type="text/javascript">
+/*
+bxslider
+*/
+var setting = function() {
+  var setting_pc = {
+				controls    : true,
+				slideWidth	: 980,
+				pager		: false,
+				auto        : true,
+				minSlides   : 3,
+				maxSlides   : 3,
+				moveSlides  : 3,
+				speed       : 1000,
+				pause       : 5000
+  };
+  var setting_sp = {
+				controls    : true,
+				slideWidth	: 320,
+				pager		: false,
+				auto        : true,
+				minSlides   : 1,
+				maxSlides   : 1,
+				moveSlides  : 1,
+				speed       : 1000,
+				pause       : 5000
+  };
+  return ($(window).width()>767) ? setting_pc : setting_sp;
+}
+var mySlider = $('.bxslider').bxSlider(setting());
+$(window).resize(function(){
+  mySlider.reloadSlider(setting());
+});
+</script>
+<script>
+/*
+スクロールテーブル
+*/
+$(function(){ 
+	jQuery(".scroll").bind({
+		'touchstart': function(e) {
+		if($(this).children(".touch_close").is(":visible")) $(this).children(".touch_close").fadeOut();
+		},
+		'touchmove': function(e) {
+		},
+		'touchend': function(e) {
+		}
+	});
+})
+$(function(){ 
+    jQuery(document).on("click", ".touch_close", function(){
+                $(this).fadeOut();
+   }); 
+})
+/*
+タブパーツ
+*/
+$(function() {
+	$(".tab li").click(function() {
+		$(".tab li").removeClass('on');
+		$(this).addClass('on')
+		var i = $(".tab li").index(this);
+		$(".tab_window").addClass('down');
+		$(".tab_window").eq(i).removeClass('down');
+	});
+});
+</script>
+<script>
+/*
+スマホメニュー
+*/
+$("header .header .sp_menu").click(function () {
+	$("header .header nav").toggleClass("on");
+	$("header .header nav").append("<div class='nav_close'></div>");
+});
+$(document).on("click", "header .header nav ul li.menu_close",
+(function(){
+	$("header .header nav").removeClass("on");
+	$('.nav_close').remove();
+}));
+$(document).on("click touchstart", ".nav_close",
+(function(){
+	$("header .header nav").removeClass("on");
+	$('.nav_close').remove();
+}));
+</script>
+</body>
+</html>
